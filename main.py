@@ -6,7 +6,7 @@ from utils import CelebA
 flags = tf.app.flags
 os.environ["CUDA_VISIBLE_DEVICES"]="3"
 flags.DEFINE_integer("OPER_FLAG", 0, "the flag of opertion: 0 is for training ")
-flags.DEFINE_string("path" , '/media/tbalaji/37be48ec-162a-43aa-a018-1f7f23af22ac/tbalaji/data/celebrity/Img/train_data_root/celebA/', "the path of training data, for example /home/hehe/celebA/")
+flags.DEFINE_string("path" , '', "the path of training data, for example /home/hehe/celebA/")
 flags.DEFINE_integer("batch_size", 16, "batch size")
 flags.DEFINE_integer("max_iters", 32000, "the maxmization of training number")
 flags.DEFINE_float("learn_rate", 0.0001, "the learning rate for G and D networks")
