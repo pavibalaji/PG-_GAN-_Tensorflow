@@ -4,9 +4,7 @@ from utils import save_images
 from utils import CelebA
 import numpy as np
 import scipy
-real = '/media/tbalaji/37be48ec-162a-43aa-a018-1f7f23af22ac/tbalaji/programs/progressive_growing_of_gans_tensorflow-master/real/'
-real_lower = '/media/tbalaji/37be48ec-162a-43aa-a018-1f7f23af22ac/tbalaji/programs/progressive_growing_of_gans_tensorflow-master/real_lower/'
-fake = '/media/tbalaji/37be48ec-162a-43aa-a018-1f7f23af22ac/tbalaji/programs/progressive_growing_of_gans_tensorflow-master/fake/'
+
 class PGGAN(object):
 
     # build model
@@ -199,8 +197,8 @@ class PGGAN(object):
                     realbatch_array = np.clip(realbatch_array, -1, 1)
                     save_images(realbatch_array[0:self.batch_size], [2, self.batch_size/2],
                                 '{}/{:02d}_real.png'.format(self.sample_path, step))
-                    scipy.misc.imsave(real + 'real.png', realbatch_array[0])
-                    #save_images(realbatch_array[0], '{}/{:02d}_real.png'.format(self.sample_path, step))
+                    #scipy.misc.imsave(real + 'real.png', realbatch_array[0])
+                   
 
                     if self.trans and self.pg != 0:
 
@@ -208,15 +206,15 @@ class PGGAN(object):
 
                         save_images(low_realbatch_array[0:self.batch_size], [2, self.batch_size / 2],
                                     '{}/{:02d}_real_lower.png'.format(self.sample_path, step))
-                        scipy.misc.imsave(real_lower + 'real_lower.png', low_realbatch_array[0])
-                        #save_images(low_realbatch_array[0], '{}/{:02d}_real_lower.png'.format(self.sample_path, step))
+                        #scipy.misc.imsave(real_lower + 'real_lower.png', low_realbatch_array[0])
+                        
                    
                     fake_image = sess.run(self.fake_images,
                                           feed_dict={self.images: realbatch_array, self.z: sample_z})
                     fake_image = np.clip(fake_image, -1, 1)
-                    save_images(fake_image[0:self.batch_size], [2, self.batch_size/2], 'train.png'.format(self.sample_path, step))
-                    scipy.misc.imsave(fake + 'fake.png', fake_image[0])
-                    #save_images(fake_image[0], '{}/{:02d}_train.png'.format(self.sample_path, step))
+                    save_images(fake_image[0:self.batch_size], [2, self.batch_size/2], '{}/{:02d}_train.png'.format(self.sample_path, step))
+                    #scipy.misc.imsave(fake + 'fake.png', fake_image[0])
+                    
 
                 if np.mod(step, 4000) == 0 and step != 0:
                     self.saver.save(sess, self.gan_model_path)
